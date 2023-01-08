@@ -8,6 +8,7 @@ public class StateMachines : MonoBehaviour
 {
     public GameObject player;
     private NavMeshAgent agent;
+    public Animator EnemyAnim;
 
     private void Start()
     {
@@ -18,12 +19,15 @@ public class StateMachines : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) < 2f)
         {
+            EnemyAnim.SetBool("iswalk", false);
             Debug.Log("Player is in range");
             agent.isStopped = true;
             Attack();
         }
         else
         {
+            EnemyAnim.SetBool("iswalk", true);
+            EnemyAnim.SetBool("isattack", false);
             agent.isStopped = false;
             agent.SetDestination(player.transform.position);
         }
@@ -31,10 +35,11 @@ public class StateMachines : MonoBehaviour
 
     private void Attack()
     {
-        //Attack Func
+        EnemyAnim.SetBool("isattack",true);
     }
     public void Die()
     {
-        //Die Func
+
+        EnemyAnim.SetBool("isdead", true);
     }
 }

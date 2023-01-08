@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Takes the input vector from Movement() to get movement direction. Also using Vector3.ClampMagnitude to set a max speed. 
         
-        playerRb.AddForce(movementInput * moveForce , ForceMode.Force);
+        playerRb.AddRelativeForce(movementInput * moveForce , ForceMode.Force);
         playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, maxSpeed);
     }
 
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         //Using raycast to check if the character is grounded. We can add layer mask if necessary.
         RaycastHit hit;
         Ray landingRay = new Ray(transform.position, Vector3.down);
-        Debug.Log(isGrounded + "," + canJump);
+       
         if (Physics.Raycast(landingRay, out hit, .1f) && canJump)
         {
             Debug.Log("Raycast working");
